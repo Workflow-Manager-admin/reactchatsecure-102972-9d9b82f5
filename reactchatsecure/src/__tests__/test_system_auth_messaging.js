@@ -2,6 +2,19 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import App from "../App";
 
+// Socket.io-client mock variables (declared before jest.mock)
+const mockEmit = jest.fn();
+let mockSocketOnHandlers = {};
+let mockSocketConnected = false;
+const mockSocket = {
+  connect: jest.fn(() => { mockSocketConnected = true; }),
+  disconnect: jest.fn(() => { mockSocketConnected = false; }),
+  emit: (...args) => mockEmit(...args),
+  on: (e, h) => { mockSocketOnHandlers[e] = h; },
+  off: (e) => { delete mockSocketOnHandlers[e]; },
+  get connected() { return mockSocketConnected; }
+};
+
 /**
  * System test mocks: all used mocks prefixed "mock" and in scope for jest.mock factories
  */
@@ -21,18 +34,6 @@ jest.mock("../firebase", () => ({
     return () => {};
   }
 }));
-
-const mockEmit = jest.fn();
-let mockSocketOnHandlers = {};
-let mockSocketConnected = false;
-const mockSocket = {
-  connect: jest.fn(() => { mockSocketConnected = true; }),
-  disconnect: jest.fn(() => { mockSocketConnected = false; }),
-  emit: (...args) => mockEmit(...args),
-  on: (e, h) => { mockSocketOnHandlers[e] = h; },
-  off: (e) => { delete mockSocketOnHandlers[e]; },
-  get connected() { return mockSocketConnected; }
-};
 
 jest.mock("../socket", () => ({
   socket: mockSocket
