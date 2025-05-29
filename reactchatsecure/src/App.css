@@ -36,6 +36,28 @@ body {
   flex-direction: column;
 }
 
+/* Responsive chat layout: Switch from row to column on mobile */
+@media (max-width: 900px) {
+  .messenger-flex-row {
+    flex-direction: column !important;
+    min-height: 90vh !important;
+    height: auto !important;
+  }
+  .app-main-content {
+    min-width: 0 !important;
+  }
+}
+
+/* Sidebar hide/collapse logic for small screens */
+@media (max-width: 700px) {
+  .sidebar-pane {
+    display: none !important;
+  }
+  .app-main-content {
+    padding: 0 2vw;
+  }
+}
+
 .navbar {
   background: var(--primary-blue);
   color: #fff;
