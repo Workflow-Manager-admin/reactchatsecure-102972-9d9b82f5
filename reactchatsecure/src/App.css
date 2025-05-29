@@ -241,6 +241,8 @@ body {
   align-items: center;
   gap: 12px;
   min-height: 60px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(25, 118, 210, 0.13);
 }
 
 .sidebar-chat-row .sidebar-avatar {
