@@ -449,6 +449,13 @@ body {
     margin-top: 7px;
     padding-bottom: 4px;
   }
+  .chat-input,
+  .chat-input-row .btn {
+    font-size: 1.11rem;
+    padding: 15px 14px !important;
+    min-height: 46px !important;
+    touch-action: manipulation;
+  }
 }
 .chat-input {
   flex: 1;

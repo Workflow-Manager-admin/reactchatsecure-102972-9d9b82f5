@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
@@ -7,6 +7,9 @@ import ChatInput from './components/ChatInput';
 
 // PUBLIC_INTERFACE
 function App() {
+  // Responsive sidebar toggle state (mobile)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   // Static demo data for Messenger UI only (authentication logic removed!)
   // -- Realistic contacts
   const demoSidebarChats = [
