@@ -2,38 +2,40 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import App from "../App";
 
-// --- Mocks ---
-const loginMock = jest.fn();
-const signupMock = jest.fn();
-const logoutMock = jest.fn();
-let authCallback = null;
-const testUser = { email: "sysuser@test.com" };
+/**
+ * System test mocks: all used mocks prefixed "mock" and in scope for jest.mock factories
+ */
+const mockLogin = jest.fn();
+const mockSignup = jest.fn();
+const mockLogout = jest.fn();
+let mockAuthCallback = null;
+const mockTestUser = { email: "sysuser@test.com" };
 
 jest.mock("../firebase", () => ({
-  login: (...args) => loginMock(...args),
-  signup: (...args) => signupMock(...args),
-  logout: () => logoutMock(),
+  login: (...args) => mockLogin(...args),
+  signup: (...args) => mockSignup(...args),
+  logout: () => mockLogout(),
   subscribeToAuthChange: (cb) => {
-    authCallback = cb;
+    mockAuthCallback = cb;
     cb(null);
     return () => {};
   }
 }));
 
-const emitMock = jest.fn();
-let socketOnHandlers = {};
-let socketConnected = false;
-const fakeSocket = {
-  connect: jest.fn(() => { socketConnected = true; }),
-  disconnect: jest.fn(() => { socketConnected = false; }),
-  emit: (...args) => emitMock(...args),
-  on: (e, h) => { socketOnHandlers[e] = h; },
-  off: (e) => { delete socketOnHandlers[e]; },
-  get connected() { return socketConnected; }
+const mockEmit = jest.fn();
+let mockSocketOnHandlers = {};
+let mockSocketConnected = false;
+const mockSocket = {
+  connect: jest.fn(() => { mockSocketConnected = true; }),
+  disconnect: jest.fn(() => { mockSocketConnected = false; }),
+  emit: (...args) => mockEmit(...args),
+  on: (e, h) => { mockSocketOnHandlers[e] = h; },
+  off: (e) => { delete mockSocketOnHandlers[e]; },
+  get connected() { return mockSocketConnected; }
 };
 
 jest.mock("../socket", () => ({
-  socket: fakeSocket
+  socket: mockSocket
 }));
 
 describe("System/E2E: Complete user journey scenarios", () => {
