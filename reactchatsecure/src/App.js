@@ -71,7 +71,40 @@ function App() {
         color: "var(--text-color)",
       }}
     >
+      {/* Top App Bar */}
       <TopBar user={demoUser} onLogout={() => {}} />
+
+      {/* Sidebar toggle btn: only visible on mobile */}
+      <button
+        className="sidebar-toggle-btn"
+        aria-label={sidebarOpen ? "Close chats sidebar" : "Open chats sidebar"}
+        aria-controls="sidebar-pane"
+        aria-expanded={sidebarOpen}
+        type="button"
+        style={{
+          display: "none" // will be overridden by CSS media query
+        }}
+        onClick={() => setSidebarOpen(o => !o)}
+        tabIndex={0}
+      >
+        {sidebarOpen
+          ? (
+            <span aria-hidden="true" style={{fontWeight:800, fontSize:"1.6em",lineHeight:1}}>×</span>
+          ) : (
+            <span aria-hidden="true" style={{fontWeight:700, fontSize:"1.05em",lineHeight:1}}>☰</span>
+          )}
+      </button>
+
+      {/* Sidebar overlay for mobile modal */}
+      {sidebarOpen && (
+        <div
+          className="sidebar-overlay"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+          tabIndex={-1}
+        />
+      )}
+
       <div
         className="messenger-flex-row"
         style={{
@@ -84,9 +117,23 @@ function App() {
           alignItems: "stretch"
         }}
       >
-        <div className="sidebar-pane">
+        {/* Sidebar: normal on desktop; modal slide-in on mobile */}
+        <div
+          className={
+            sidebarOpen
+              ? "sidebar-pane open"
+              : "sidebar-pane"
+          }
+          id="sidebar-pane"
+          role="navigation"
+          aria-label="Chats sidebar"
+          style={{
+            zIndex: sidebarOpen ? 210 : undefined
+          }}
+        >
           <Sidebar chats={demoSidebarChats} />
         </div>
+
         <main
           className="app-main-content"
           style={{

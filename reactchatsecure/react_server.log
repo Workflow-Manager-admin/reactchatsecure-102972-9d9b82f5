@@ -47,3 +47,6 @@ src/App.js
   Line 11:23:  'setSidebarOpen' is assigned a value but never used  no-unused-vars
 
 webpack compiled with 1 warning
+Compiling...
+Compiled successfully!
+webpack compiled successfully
