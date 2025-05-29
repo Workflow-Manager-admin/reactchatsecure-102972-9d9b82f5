@@ -2,7 +2,11 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import App from "../App";
 
-// Socket.io-client mock variables (declared before jest.mock)
+/**
+ * All mockSocket-related variables (mockSocket, mockSocketOnHandlers, etc.) must be declared and initialized above jest.mock.
+ */
+
+// Socket.io-client mock variables (require full initialization above jest.mock)
 const mockEmit = jest.fn();
 let mockSocketOnHandlers = {};
 let mockSocketConnected = false;
@@ -15,9 +19,7 @@ const mockSocket = {
   get connected() { return mockSocketConnected; }
 };
 
-/**
- * System test mocks: all used mocks prefixed "mock" and in scope for jest.mock factories
- */
+// Firebase auth mocks (in scope for jest.mock)
 const mockLogin = jest.fn();
 const mockSignup = jest.fn();
 const mockLogout = jest.fn();
