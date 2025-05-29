@@ -1,9 +1,21 @@
 :root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
+  --primary-blue: #1976D2;
+  --accent-green: #43A047;
+  --neutral-bg: #f4f9fb;
+  --surface: #ffffff;
+  --sidebar-bg: #174785;
+  --sidebar-active: #1650AC;
+  --sidebar-chat-hover: #e3f1fd;
+  --surface-chat-bg: #f7fbff;
+  --msg-own-bg: #1976D2;
+  --msg-own-text: #fff;
+  --msg-other-bg: #e3f1fd;
+  --msg-other-text: #0d263c;
+  --border-color: #dae5f1;
+  --cta-color: #43A047;
+  --cta-hover: #388b48;
+  --text-color: #14213d;
+  --text-secondary: #6382a5;
 }
 
 body {
