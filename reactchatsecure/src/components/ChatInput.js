@@ -24,7 +24,17 @@ export default function ChatInput({ onSend, disabled }) {
         maxLength={200}
         autoFocus
       />
-      <button className="btn" type="submit" disabled={disabled || !value.trim()}>Send</button>
+      <button
+        className="btn"
+        type="submit"
+        style={{
+          background: "var(--primary-blue)",
+          color: "#fff"
+        }}
+        disabled={disabled || !value.trim()}
+      >
+        Send
+      </button>
     </form>
   );
 }
