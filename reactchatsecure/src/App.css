@@ -377,9 +377,18 @@ body {
 /* --- CHAT INPUT --- */
 .chat-input-row {
   display: flex;
-  gap: 9px;
-  align-items: flex-end;
-  margin-top: 7px;
+  gap: 11px;
+  align-items: stretch;
+  margin-top: 9px;
+  padding-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .chat-input-row {
+    gap: 7px;
+    margin-top: 7px;
+    padding-bottom: 4px;
+  }
 }
 .chat-input {
   flex: 1;
