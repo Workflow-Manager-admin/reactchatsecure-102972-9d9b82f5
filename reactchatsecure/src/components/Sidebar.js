@@ -39,72 +39,70 @@ export default function Sidebar({ chats }) {
           background: "var(--sidebar-bg)",
         }}
       >
-        {chats.map((chat) => (
-          <div
-            key={chat.id}
-            className={`sidebar-chat-row${chat.active ? " active" : ""}`}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 1,
-              padding: "12px 20px",
-              background: chat.active
-                ? "var(--sidebar-active)"
-                : "var(--sidebar-bg)",
-              borderLeft: chat.active
-                ? "4px solid var(--accent-green)"
-                : "4px solid transparent",
-              cursor: "pointer",
-              color: chat.active ? "#fff" : "var(--text-secondary)",
-              transition: "background 0.10s, border 0.10s, color 0.13s",
-              boxShadow: chat.active
-                ? "0 2px 10px 0 rgba(67, 160, 71, 0.10)"
-                : undefined,
-            }}
-          >
-            <span
+        {chats.map((chat) => {
+          // Avatar initials logic
+          const initials =
+            chat.name
+              ?.split(' ')
+              .map(p => (p && p[0]) ? p[0].toUpperCase() : '')
+              .slice(0, 2)
+              .join('') || 'U';
+          return (
+            <div
+              key={chat.id}
+              className={`sidebar-chat-row${chat.active ? " active" : ""}`}
               style={{
-                fontWeight: chat.active ? 700 : 500,
-                fontSize: "1.16rem",
-                color: chat.active
-                  ? "var(--accent-green)"
-                  : "var(--primary-blue)",
-                letterSpacing: 0.01,
-                marginBottom: 2,
+                background: chat.active
+                  ? "var(--sidebar-active)"
+                  : "var(--sidebar-bg)",
+                borderLeft: chat.active
+                  ? "4px solid var(--accent-green)"
+                  : "4px solid transparent",
+                color: chat.active ? "#fff" : "var(--text-secondary)",
+                transition: "background 0.10s, border 0.10s, color 0.13s",
+                boxShadow: chat.active
+                  ? "0 2px 10px 0 rgba(67, 160, 71, 0.10)"
+                  : undefined,
+                cursor: "pointer",
+                padding: "0px 14px",
               }}
             >
-              {chat.name}
-            </span>
-            <span
-              style={{
-                color: "var(--text-secondary)",
-                fontSize: "1rem",
-                marginBottom: chat.unread ? 1 : 0,
-              }}
-            >
-              {chat.lastMsg}
-            </span>
-            {chat.unread > 0 && (
-              <span
-                className="sidebar-badge"
-                style={{
-                  background: "var(--accent-green)",
-                  color: "#fff",
-                  fontWeight: 600,
-                  fontSize: "0.8rem",
-                  marginTop: 4,
-                  alignSelf: "flex-end",
-                  padding: "2px 11px",
-                  borderRadius: "1em",
-                  letterSpacing: "0.04em",
-                  boxShadow: "0 2px 8px 0 rgba(67, 160, 71, 0.08)",
-                }}
-              >
-                {chat.unread}
-              </span>
-            )}
-          </div>
-        ))}
+              <div className="sidebar-avatar">{initials}</div>
+              <div className="sidebar-info">
+                <span
+                  style={{
+                    fontWeight: chat.active ? 700 : 500,
+                    fontSize: "1.13rem",
+                    color: chat.active
+                      ? "var(--accent-green)"
+                      : "var(--primary-blue)",
+                    letterSpacing: 0.01
+                  }}
+                >
+                  {chat.name}
+                </span>
+                <span
+                  style={{
+                    color: "var(--text-secondary)",
+                    fontSize: "0.98rem",
+                    opacity: .96,
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    maxWidth: 164,
+                  }}
+                >
+                  {chat.lastMsg}
+                </span>
+                {chat.unread > 0 && (
+                  <span className="sidebar-badge">
+                    {chat.unread}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </aside>
   );
