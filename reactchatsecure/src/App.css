@@ -175,9 +175,31 @@ body {
 
 /* --- SIDEBAR --- */
 .sidebar-chat-row {
-  border-radius: 6px 0 0 6px;
-  margin-bottom: 3px;
+  border-radius: 12px 0 0 12px;
+  margin-bottom: 9px;
   transition: background 0.13s, border 0.15s, color 0.13s, box-shadow 0.12s;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  min-height: 60px;
+}
+
+.sidebar-chat-row .sidebar-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  min-height: 38px;
+  background: linear-gradient(135deg, var(--primary-blue) 40%, var(--accent-green) 100%);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-right: 10px;
+  box-shadow: 0 1px 6px 0 rgba(25,118,210,0.09);
+  user-select: none;
+  flex-shrink: 0;
 }
 .sidebar-chat-row:hover {
   background: var(--sidebar-chat-hover);
