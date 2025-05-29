@@ -8,18 +8,24 @@ import ChatInput from './components/ChatInput';
 // PUBLIC_INTERFACE
 function App() {
   // Static demo data for Messenger UI only (authentication logic removed!)
+  // -- Realistic contacts
   const demoSidebarChats = [
-    { id: 1, name: 'Alice', lastMsg: 'See you!', unread: 2, active: false },
-    { id: 2, name: 'Bob', lastMsg: 'Call me?', unread: 0, active: true },
-    { id: 3, name: 'Team Channel', lastMsg: 'Project updates sent.', unread: 3, active: false }
+    { id: 1, name: 'Sophia Martinez', lastMsg: 'Wait, when is your flight again?', unread: 1, active: false },
+    { id: 2, name: 'Liam Patel', lastMsg: "Don't forget the slides! 😎", unread: 0, active: true },
+    { id: 3, name: 'Emma Zhang', lastMsg: 'On my way, see you soon!', unread: 2, active: false },
+    { id: 4, name: 'Work Group', lastMsg: 'Design review at 2pm. Join if you can.', unread: 3, active: false }
   ];
+  // -- Realistic chat
   const demoMessages = [
-    { email: "bob@test.com", text: "Hi! How are you?" },
-    { email: "demo@demo.com", text: "Fine, Bob! And you?" },
-    { email: "bob@test.com", text: "Let's catch up tonight?" },
-    { email: "demo@demo.com", text: "Sure, ping me after 8." }
+    { email: "liam.patel@email.com", text: "Hey! Ready for our meeting this afternoon?" },
+    { email: "sophie.martinez@mydomain.com", text: "I think so. Did you get my notes?" },
+    { email: "liam.patel@email.com", text: "Yes, super helpful! By the way, bring the prototype?" },
+    { email: "sophie.martinez@mydomain.com", text: "Already packed it in my bag 😁" },
+    { email: "liam.patel@email.com", text: "Perfect. See you at 2. Want coffee first?" },
+    { email: "sophie.martinez@mydomain.com", text: "Always! ☕ Meet at Roasted Bean lobby?" },
+    { email: "liam.patel@email.com", text: "Absolutely, see you there in 30!" }
   ];
-  const demoUser = { email: "demo@demo.com" };
+  const demoUser = { email: "sophie.martinez@mydomain.com" };
 
   // Render Messenger only (no Login/Register or auth logic)
   return (
