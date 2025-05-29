@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Sidebar from './components/Sidebar';
 import TopBar from './components/TopBar';
 import ChatWindow from './components/ChatWindow';
 import ChatInput from './components/ChatInput';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
 
 /**
  * AppMain is the main functional container for the static Messenger UI demo.
- * It does not interact with any APIs or logic; everything is static/mock.
+ * All authentication forms have been removed. Always shows static chat UI with mock/demo data.
  */
-function AppMain() {
-  // Simulate logged-in or not for demo UI
-  const [demoAuth, setDemoAuth] = useState(false); // false = auth screen, true = main messenger
-  const [authMode, setAuthMode] = useState("login"); // or 'register'
-
-  // Placeholder static data for messenger mode
+// PUBLIC_INTERFACE
+function App() {
+  // Placeholder static data
   const demoSidebarChats = [
     { id: 1, name: 'Alice', lastMsg: 'See you!', unread: 2, active: false },
     { id: 2, name: 'Bob', lastMsg: 'Call me?', unread: 0, active: true },
@@ -30,50 +25,10 @@ function AppMain() {
   ];
   const demoUser = { email: "demo@demo.com" };
 
-  // Switch between "login/register" and "messenger" view in static demo
-  if (!demoAuth) {
-    return (
-      <div className="app">
-        <nav className="navbar">
-          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-            <div className="logo">
-              <span className="logo-symbol">*</span> ReactChatSecure
-            </div>
-          </div>
-        </nav>
-        <main>
-          <div className="container">
-            <div className="auth-pane">
-              <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "16px" }}>
-                <button
-                  className={`btn${authMode === "login" ? " btn-large" : ""}`}
-                  onClick={() => setAuthMode("login")}
-                  disabled={authMode === "login"}
-                >
-                  Login
-                </button>
-                <button
-                  className={`btn${authMode === "register" ? " btn-large" : ""}`}
-                  onClick={() => setAuthMode("register")}
-                  disabled={authMode === "register"}
-                >
-                  Register
-                </button>
-              </div>
-              {authMode === "login" ? 
-                <LoginForm onLogin={() => setDemoAuth(true)} error={""} loading={false} /> :
-                <RegisterForm onRegister={() => setDemoAuth(true)} error={""} loading={false} />}
-            </div>
-          </div>
-        </main>
-      </div>
-    );
-  }
-
   // Messenger view: layout with Sidebar, TopBar, ChatWindow, ChatInput.
   return (
     <div className="app" style={{ minHeight: "100vh", background: "var(--kavia-dark)" }}>
-      <TopBar user={demoUser} onLogout={() => setDemoAuth(false)} />
+      <TopBar user={demoUser} onLogout={() => {}} />
       <div style={{
         display: "flex",
         flexDirection: "row",
@@ -91,11 +46,6 @@ function AppMain() {
       </div>
     </div>
   );
-}
-
-// PUBLIC_INTERFACE
-function App() {
-  return <AppMain />;
 }
 
 export default App;

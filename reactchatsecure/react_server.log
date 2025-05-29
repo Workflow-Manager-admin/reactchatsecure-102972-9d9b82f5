@@ -2,9 +2,9 @@
 > react-kavia@0.1.0 start
 > react-scripts start
 
-(node:5016) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:5348) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-(node:5016) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:5348) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 Starting the development server...
 
 Compiled successfully!
@@ -19,33 +19,3 @@ To create a production build, use npm run build.
 
 webpack compiled successfully
 Compiling...
-Failed to compile.
-
-Module not found: Error: Can't resolve './components/Sidebar' in '/home/kavia/workspace/code-generation/reactchatsecure-102972-9d9b82f5/reactchatsecure/src'
-ERROR in ./src/App.js 7:0-43
-Module not found: Error: Can't resolve './components/Sidebar' in '/home/kavia/workspace/code-generation/reactchatsecure-102972-9d9b82f5/reactchatsecure/src'
-
-ERROR in ./src/App.js 8:0-41
-Module not found: Error: Can't resolve './components/TopBar' in '/home/kavia/workspace/code-generation/reactchatsecure-102972-9d9b82f5/reactchatsecure/src'
-
-webpack compiled with 2 errors
-Compiling...
-Failed to compile.
-
-Module not found: Error: Can't resolve './components/TopBar' in '/home/kavia/workspace/code-generation/reactchatsecure-102972-9d9b82f5/reactchatsecure/src'
-ERROR in ./src/App.js 8:0-41
-Module not found: Error: Can't resolve './components/TopBar' in '/home/kavia/workspace/code-generation/reactchatsecure-102972-9d9b82f5/reactchatsecure/src'
-
-webpack compiled with 1 error
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
-Compiling...
-Compiled successfully!
-webpack compiled successfully
