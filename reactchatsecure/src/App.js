@@ -1,134 +1,101 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import { AuthProvider, useAuth } from './components/AuthProvider';
-import LoginForm from './components/LoginForm';
-import RegisterForm from './components/RegisterForm';
+import Sidebar from './components/Sidebar';
+import TopBar from './components/TopBar';
 import ChatWindow from './components/ChatWindow';
 import ChatInput from './components/ChatInput';
-import { signup, login, logout } from './firebase';
-import { socket } from './socket';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
+/**
+ * AppMain is the main functional container for the static Messenger UI demo.
+ * It does not interact with any APIs or logic; everything is static/mock.
+ */
 function AppMain() {
-  const { user, loading } = useAuth();
+  // Simulate logged-in or not for demo UI
+  const [demoAuth, setDemoAuth] = useState(false); // false = auth screen, true = main messenger
   const [authMode, setAuthMode] = useState("login"); // or 'register'
-  const [authLoading, setAuthLoading] = useState(false);
-  const [authError, setAuthError] = useState('');
-  const [messages, setMessages] = useState([]);
-  const [socketReady, setSocketReady] = useState(false);
 
-  // Auth handlers
-  const handleLogin = async (email, password) => {
-    setAuthLoading(true); setAuthError('');
-    try {
-      await login(email, password);
-      setAuthMode("login");
-    } catch (err) {
-      setAuthError(err.message);
-    }
-    setAuthLoading(false);
-  };
+  // Placeholder static data for messenger mode
+  const demoSidebarChats = [
+    { id: 1, name: 'Alice', lastMsg: 'See you!', unread: 2, active: false },
+    { id: 2, name: 'Bob', lastMsg: 'Call me?', unread: 0, active: true },
+    { id: 3, name: 'Team Channel', lastMsg: 'Project updates sent.', unread: 3, active: false },
+  ];  
+  const demoMessages = [
+    { email: "bob@test.com", text: "Hi! How are you?" },
+    { email: "demo@demo.com", text: "Fine, Bob! And you?" },
+    { email: "bob@test.com", text: "Let's catch up tonight?" },
+    { email: "demo@demo.com", text: "Sure, ping me after 8." }
+  ];
+  const demoUser = { email: "demo@demo.com" };
 
-  const handleRegister = async (email, password) => {
-    setAuthLoading(true); setAuthError('');
-    try {
-      await signup(email, password);
-      setAuthMode("login");
-    } catch (err) {
-      setAuthError(err.message);
-    }
-    setAuthLoading(false);
-  };
-
-  // Socket.IO setup/cleanup
-  useEffect(() => {
-    if (!user) {
-      if (socket.connected) socket.disconnect();
-      setSocketReady(false);
-      setMessages([]);
-      return;
-    }
-    // User is authenticated: connect socket, set up events
-    socket.connect();
-    setSocketReady(true);
-
-    socket.emit("join", { email: user.email });
-    // Listen for new messages
-    socket.on("chat_message", msg => setMessages((msgs) => [...msgs, msg]));
-    // Optionally listen for initial history
-
-    return () => {
-      socket.off("chat_message");
-      socket.disconnect();
-      setSocketReady(false);
-    };
-  }, [user]);
-
-  const handleSendMessage = useCallback((text) => {
-    if (!user || !text.trim()) return;
-    // Optimistically add
-    setMessages(msgs => [...msgs, { email: user.email, text }]);
-    socket.emit("chat_message", { email: user.email, text });
-  }, [user]);
-
-  // Render logic
-  return (
-    <div className="app">
-      <nav className="navbar">
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-          <div className="logo">
-            <span className="logo-symbol">*</span> ReactChatSecure
+  // Switch between "login/register" and "messenger" view in static demo
+  if (!demoAuth) {
+    return (
+      <div className="app">
+        <nav className="navbar">
+          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+            <div className="logo">
+              <span className="logo-symbol">*</span> ReactChatSecure
+            </div>
           </div>
-          {user &&
-            <button className="btn" onClick={logout} style={{ marginLeft: 10 }}>Logout</button>
-          }
-        </div>
-      </nav>
-      <main>
-        <div className="container">
-          {!user && !loading && (
+        </nav>
+        <main>
+          <div className="container">
             <div className="auth-pane">
               <div style={{ display: "flex", justifyContent: "center", gap: "16px", marginBottom: "16px" }}>
                 <button
                   className={`btn${authMode === "login" ? " btn-large" : ""}`}
-                  onClick={() => { setAuthMode("login"); setAuthError(""); }}
+                  onClick={() => setAuthMode("login")}
                   disabled={authMode === "login"}
                 >
                   Login
                 </button>
                 <button
                   className={`btn${authMode === "register" ? " btn-large" : ""}`}
-                  onClick={() => { setAuthMode("register"); setAuthError(""); }}
+                  onClick={() => setAuthMode("register")}
                   disabled={authMode === "register"}
                 >
                   Register
                 </button>
               </div>
-              {authMode === "login" ?
-                <LoginForm onLogin={handleLogin} error={authError} loading={authLoading} /> :
-                <RegisterForm onRegister={handleRegister} error={authError} loading={authLoading} />}
+              {authMode === "login" ? 
+                <LoginForm onLogin={() => setDemoAuth(true)} error={""} loading={false} /> :
+                <RegisterForm onRegister={() => setDemoAuth(true)} error={""} loading={false} />}
             </div>
-          )}
-          {user && (
-            <div className="chat-pane">
-              <div className="subtitle">Welcome, {user.email}</div>
-              <ChatWindow messages={messages} userEmail={user.email} />
-              <ChatInput onSend={handleSendMessage} disabled={!socketReady} />
-            </div>
-          )}
-          {loading && <div className="description">Loading...</div>}
-        </div>
-      </main>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // Messenger view: layout with Sidebar, TopBar, ChatWindow, ChatInput.
+  return (
+    <div className="app" style={{ minHeight: "100vh", background: "var(--kavia-dark)" }}>
+      <TopBar user={demoUser} onLogout={() => setDemoAuth(false)} />
+      <div style={{
+        display: "flex",
+        flexDirection: "row",
+        marginTop: "60px",
+        minHeight: "85vh",
+        height: "calc(100vh - 60px)"
+      }}>
+        <Sidebar chats={demoSidebarChats} />
+        <main style={{ flexGrow: 1, background: "#19191c", padding: 0, minWidth: 0, display: "flex", flexDirection: "column" }}>
+          <div style={{ padding: "16px 0 0 0", flex: 1, display: "flex", flexDirection: "column" }}>
+            <ChatWindow messages={demoMessages} userEmail={demoUser.email} />
+            <ChatInput onSend={() => {}} disabled={false} />
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
 
 // PUBLIC_INTERFACE
 function App() {
-  return (
-    <AuthProvider>
-      <AppMain />
-    </AuthProvider>
-  );
+  return <AppMain />;
 }
 
 export default App;
