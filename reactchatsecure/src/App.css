@@ -106,3 +106,90 @@ body {
   padding: 12px 24px;
   font-size: 1.1rem;
 }
+
+/* ----- Additional Components (auth/chat) ------ */
+.auth-pane, .chat-pane {
+  margin: 0 auto;
+  margin-top: 140px;
+  max-width: 420px;
+  background: rgba(26, 26, 26, 0.98);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.11);
+  border-radius: 10px;
+  padding: 32px 24px;
+  box-sizing: border-box;
+}
+
+.auth-form, .chat-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.auth-input, .chat-input {
+  border: 1px solid var(--border-color);
+  background: #222;
+  color: var(--text-color);
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+.auth-error {
+  color: #fb667b;
+  font-size: 1rem;
+  padding-bottom: 2px;
+  font-weight: 500;
+}
+
+.chat-window {
+  height: 380px;
+  background: #222;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px 12px 8px 12px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.chat-placeholder {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 60px;
+}
+
+.message-row {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+}
+.message-row.own-message .message-username {
+  color: var(--kavia-orange);
+}
+.message-username {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #aaa;
+  margin-bottom: 1px;
+}
+.message-text {
+  background: #19191c;
+  color: var(--text-color);
+  border-radius: 5px;
+  padding: 6px 11px;
+  font-size: 1.08rem;
+  max-width: 75vw;
+  word-break: break-word;
+  display: inline-block;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 7px;
+  align-items: flex-end;
+}
+.chat-input {
+  flex: 1;
+}
