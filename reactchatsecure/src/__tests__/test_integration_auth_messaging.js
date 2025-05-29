@@ -2,6 +2,19 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import App from "../App";
 
+// Socket.io-client mock (all mock variables prefixed and in scope)
+const mockEmit = jest.fn();
+let mockSocketOnHandlers = {};
+let mockSocketConnected = false;
+const mockSocketObj = {
+  connect: jest.fn(() => { mockSocketConnected = true; }),
+  disconnect: jest.fn(() => { mockSocketConnected = false; }),
+  emit: (...args) => mockEmit(...args),
+  on: (event, handler) => { mockSocketOnHandlers[event] = handler; },
+  off: (event) => { delete mockSocketOnHandlers[event]; },
+  get connected() { return mockSocketConnected; }
+};
+
 /**
  * Integration test mocks must not use out-of-scope variables in jest.mock factories.
  * All mocks start with 'mock' prefix and are declared above each jest.mock.
@@ -25,20 +38,6 @@ jest.mock("../firebase", () => ({
     return () => {};
   }
 }));
-
-// Socket.io-client mock (all mock variables prefixed and in scope)
-const mockEmit = jest.fn();
-let mockSocketOnHandlers = {};
-let mockSocketConnected = false;
-
-const mockSocketObj = {
-  connect: jest.fn(() => { mockSocketConnected = true; }),
-  disconnect: jest.fn(() => { mockSocketConnected = false; }),
-  emit: (...args) => mockEmit(...args),
-  on: (event, handler) => { mockSocketOnHandlers[event] = handler; },
-  off: (event) => { delete mockSocketOnHandlers[event]; },
-  get connected() { return mockSocketConnected; }
-};
 
 jest.mock("../socket", () => ({
   socket: mockSocketObj
