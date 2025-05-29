@@ -2,45 +2,46 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import App from "../App";
 
-// Mock Firebase authentication utilities
-const loginMock = jest.fn();
-const signupMock = jest.fn();
-const logoutMock = jest.fn();
-let authCallback = null;
+/**
+ * Integration test mocks must not use out-of-scope variables in jest.mock factories.
+ * All mocks start with 'mock' prefix and are declared above each jest.mock.
+ */
 
-// Mocked current user (simulate login/logout state)
+// Firebase authentication mocks (variables in scope for jest.mock)
+const mockLogin = jest.fn();
+const mockSignup = jest.fn();
+const mockLogout = jest.fn();
+let mockAuthCallback = null;
+// Current user for authentication simulation
 const mockUser = { email: "user@example.com" };
 
 jest.mock("../firebase", () => ({
-  login: (...args) => loginMock(...args),
-  signup: (...args) => signupMock(...args),
-  logout: () => logoutMock(),
-  // Simulate subscribeToAuthChange hooks (calls callback with user or null)
+  login: (...args) => mockLogin(...args),
+  signup: (...args) => mockSignup(...args),
+  logout: () => mockLogout(),
   subscribeToAuthChange: (cb) => {
-    authCallback = cb;
-    // Allow tests to trigger login/logout via callback
-    // Call initial state: NOT logged in by default
+    mockAuthCallback = cb;
     cb(null);
     return () => {};
   }
 }));
 
-// Socket.IO mock with event listener/call interception
-const emitMock = jest.fn();
-let socketOnHandlers = {};
-let socketConnected = false;
+// Socket.io-client mock (all mock variables prefixed and in scope)
+const mockEmit = jest.fn();
+let mockSocketOnHandlers = {};
+let mockSocketConnected = false;
 
-const socketMock = {
-  connect: jest.fn(() => { socketConnected = true; }),
-  disconnect: jest.fn(() => { socketConnected = false; }),
-  emit: (...args) => emitMock(...args),
-  on: (event, handler) => { socketOnHandlers[event] = handler; },
-  off: (event) => { delete socketOnHandlers[event]; },
-  get connected() { return socketConnected; }
+const mockSocketObj = {
+  connect: jest.fn(() => { mockSocketConnected = true; }),
+  disconnect: jest.fn(() => { mockSocketConnected = false; }),
+  emit: (...args) => mockEmit(...args),
+  on: (event, handler) => { mockSocketOnHandlers[event] = handler; },
+  off: (event) => { delete mockSocketOnHandlers[event]; },
+  get connected() { return mockSocketConnected; }
 };
 
 jest.mock("../socket", () => ({
-  socket: socketMock
+  socket: mockSocketObj
 }));
 
 describe("Integration: Auth and Messaging Flows", () => {
