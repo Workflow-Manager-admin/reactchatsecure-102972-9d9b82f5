@@ -70,6 +70,7 @@ function App() {
     >
       <TopBar user={demoUser} onLogout={() => {}} />
       <div
+        className="messenger-flex-row"
         style={{
           display: "flex",
           flexDirection: "row",
@@ -77,10 +78,14 @@ function App() {
           minHeight: "85vh",
           height: "calc(100vh - 60px)",
           background: "var(--neutral-bg)",
+          alignItems: "stretch"
         }}
       >
-        <Sidebar chats={demoSidebarChats} />
+        <div className="sidebar-pane">
+          <Sidebar chats={demoSidebarChats} />
+        </div>
         <main
+          className="app-main-content"
           style={{
             flexGrow: 1,
             background: "var(--neutral-bg)",
@@ -96,6 +101,7 @@ function App() {
               flex: 1,
               display: "flex",
               flexDirection: "column",
+              minHeight: 0,
             }}
           >
             <ChatWindow messages={demoMessages} userEmail={demoUser.email} />
