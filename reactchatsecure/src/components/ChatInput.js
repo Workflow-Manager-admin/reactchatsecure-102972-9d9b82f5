@@ -13,7 +13,7 @@ export default function ChatInput({ onSend, disabled }) {
   };
 
   return (
-    <form className="chat-input-row" onSubmit={handleSend} style={{ gap: 9 }}>
+    <form className="chat-input-row" onSubmit={handleSend}>
       <input
         className="chat-input"
         type="text"
@@ -27,12 +27,13 @@ export default function ChatInput({ onSend, disabled }) {
           border: "1.5px solid var(--primary-blue)",
           background: "#fff",
           color: "var(--primary-blue)",
-          borderRadius: 6,
-          padding: "12px",
+          borderRadius: 8,
+          padding: "13px 13px",
           fontSize: "1rem",
           fontWeight: 500,
           transition: "border 0.18s",
           outline: "none",
+          flex: 1
         }}
       />
       <button
@@ -42,14 +43,15 @@ export default function ChatInput({ onSend, disabled }) {
           background: "var(--accent-green)",
           color: "#fff",
           fontWeight: 600,
-          borderRadius: 6,
+          borderRadius: 8,
           padding: "0 28px",
-          fontSize: "1.09rem",
-          letterSpacing: ".02em",
+          fontSize: "1.13rem",
+          letterSpacing: ".01em",
           border: "none",
-          boxShadow: "0 1px 8px 0 rgba(67,160,71,0.10)",
-          transition: "background 0.18s",
-          minHeight: 42,
+          boxShadow: "0 1px 8px 0 rgba(67,160,71,0.11)",
+          transition: "background 0.17s",
+          minHeight: 46,
+          alignSelf: "stretch"
         }}
         disabled={disabled || !value.trim()}
       >
