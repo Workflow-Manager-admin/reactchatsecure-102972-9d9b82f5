@@ -5,18 +5,14 @@ import TopBar from './components/TopBar';
 import ChatWindow from './components/ChatWindow';
 import ChatInput from './components/ChatInput';
 
-/**
- * AppMain is the main functional container for the static Messenger UI demo.
- * All authentication forms have been removed. Always shows static chat UI with mock/demo data.
- */
 // PUBLIC_INTERFACE
 function App() {
-  // Placeholder static data
+  // Static demo data for Messenger UI only (authentication logic removed!)
   const demoSidebarChats = [
     { id: 1, name: 'Alice', lastMsg: 'See you!', unread: 2, active: false },
     { id: 2, name: 'Bob', lastMsg: 'Call me?', unread: 0, active: true },
-    { id: 3, name: 'Team Channel', lastMsg: 'Project updates sent.', unread: 3, active: false },
-  ];  
+    { id: 3, name: 'Team Channel', lastMsg: 'Project updates sent.', unread: 3, active: false }
+  ];
   const demoMessages = [
     { email: "bob@test.com", text: "Hi! How are you?" },
     { email: "demo@demo.com", text: "Fine, Bob! And you?" },
@@ -25,7 +21,7 @@ function App() {
   ];
   const demoUser = { email: "demo@demo.com" };
 
-  // Messenger view: layout with Sidebar, TopBar, ChatWindow, ChatInput.
+  // Render Messenger only (no Login/Register or auth logic)
   return (
     <div className="app" style={{ minHeight: "100vh", background: "var(--kavia-dark)" }}>
       <TopBar user={demoUser} onLogout={() => {}} />
