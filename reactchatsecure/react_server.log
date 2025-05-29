@@ -37,3 +37,6 @@ ERROR in ./src/App.js 8:0-41
 Module not found: Error: Can't resolve './components/TopBar' in '/home/kavia/workspace/code-generation/reactchatsecure-102972-9d9b82f5/reactchatsecure/src'
 
 webpack compiled with 1 error
+Compiling...
+Compiled successfully!
+webpack compiled successfully
