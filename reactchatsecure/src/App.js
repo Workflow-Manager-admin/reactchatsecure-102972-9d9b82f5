@@ -10,22 +10,53 @@ function App() {
   // Static demo data for Messenger UI only (authentication logic removed!)
   // -- Realistic contacts
   const demoSidebarChats = [
-    { id: 1, name: 'Sophia Martinez', lastMsg: 'Wait, when is your flight again?', unread: 1, active: false },
-    { id: 2, name: 'Liam Patel', lastMsg: "Don't forget the slides! 😎", unread: 0, active: true },
-    { id: 3, name: 'Emma Zhang', lastMsg: 'On my way, see you soon!', unread: 2, active: false },
-    { id: 4, name: 'Work Group', lastMsg: 'Design review at 2pm. Join if you can.', unread: 3, active: false }
+    {
+      id: 1,
+      name: 'Sarah Lee',
+      lastMsg: "Haha, you always know how to make me laugh 😂",
+      unread: 0,
+      active: false
+    },
+    {
+      id: 2,
+      name: 'Michael Carter',
+      lastMsg: "Let me know when you’re free to call.",
+      unread: 2,
+      active: true
+    },
+    {
+      id: 3,
+      name: "Priya Menon",
+      lastMsg: "Stepped out for coffee, back in 10!",
+      unread: 1,
+      active: false
+    },
+    {
+      id: 4,
+      name: "Alex Kim",
+      lastMsg: "Sent you the doc, check your email.",
+      unread: 0,
+      active: false
+    },
+    {
+      id: 5,
+      name: "Family Group",
+      lastMsg: "Dinner’s at 7pm, don’t be late!",
+      unread: 3,
+      active: false
+    }
   ];
-  // -- Realistic chat
+  // -- Realistic chat: conversation with Michael Carter
   const demoMessages = [
-    { email: "liam.patel@email.com", text: "Hey! Ready for our meeting this afternoon?" },
-    { email: "sophie.martinez@mydomain.com", text: "I think so. Did you get my notes?" },
-    { email: "liam.patel@email.com", text: "Yes, super helpful! By the way, bring the prototype?" },
-    { email: "sophie.martinez@mydomain.com", text: "Already packed it in my bag 😁" },
-    { email: "liam.patel@email.com", text: "Perfect. See you at 2. Want coffee first?" },
-    { email: "sophie.martinez@mydomain.com", text: "Always! ☕ Meet at Roasted Bean lobby?" },
-    { email: "liam.patel@email.com", text: "Absolutely, see you there in 30!" }
+    { email: "michael.carter@workmail.com", text: "Hey, did you finish the project outline yet?" },
+    { email: "sarah.lee@personalmail.com", text: "Almost! Adding a few more details, want me to share the doc?" },
+    { email: "michael.carter@workmail.com", text: "Please, that would help. I need to send an update to Anna." },
+    { email: "sarah.lee@personalmail.com", text: "Just shared it with you. Let me know if I missed anything!" },
+    { email: "michael.carter@workmail.com", text: "Looks good! Let’s schedule a quick call later today?" },
+    { email: "sarah.lee@personalmail.com", text: "Sure, free after 4pm. Ping me then 👍" },
+    { email: "michael.carter@workmail.com", text: "Will do, thanks Sarah!" }
   ];
-  const demoUser = { email: "sophie.martinez@mydomain.com" };
+  const demoUser = { email: "sarah.lee@personalmail.com" };
 
   // Render Messenger only (no Login/Register or auth logic)
   return (
