@@ -23,18 +23,44 @@ function App() {
 
   // Render Messenger only (no Login/Register or auth logic)
   return (
-    <div className="app" style={{ minHeight: "100vh", background: "var(--kavia-dark)" }}>
+    <div
+      className="app"
+      style={{
+        minHeight: "100vh",
+        background: "var(--neutral-bg)",
+        color: "var(--text-color)",
+      }}
+    >
       <TopBar user={demoUser} onLogout={() => {}} />
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-        marginTop: "60px",
-        minHeight: "85vh",
-        height: "calc(100vh - 60px)"
-      }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginTop: "60px",
+          minHeight: "85vh",
+          height: "calc(100vh - 60px)",
+          background: "var(--neutral-bg)",
+        }}
+      >
         <Sidebar chats={demoSidebarChats} />
-        <main style={{ flexGrow: 1, background: "#19191c", padding: 0, minWidth: 0, display: "flex", flexDirection: "column" }}>
-          <div style={{ padding: "16px 0 0 0", flex: 1, display: "flex", flexDirection: "column" }}>
+        <main
+          style={{
+            flexGrow: 1,
+            background: "var(--neutral-bg)",
+            padding: 0,
+            minWidth: 0,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            style={{
+              padding: "16px 0 0 0",
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
             <ChatWindow messages={demoMessages} userEmail={demoUser.email} />
             <ChatInput onSend={() => {}} disabled={false} />
           </div>
