@@ -2,7 +2,11 @@ import React from "react";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import App from "../App";
 
-// Socket.io-client mock (all mock variables prefixed and in scope)
+/**
+ * All mock variables (mockSocketObj, mockSocketOnHandlers, etc.) must be declared and fully initialized before jest.mock().
+ */
+
+// Socket.io-client mock variables (must be initialized above jest.mock)
 const mockEmit = jest.fn();
 let mockSocketOnHandlers = {};
 let mockSocketConnected = false;
@@ -15,17 +19,11 @@ const mockSocketObj = {
   get connected() { return mockSocketConnected; }
 };
 
-/**
- * Integration test mocks must not use out-of-scope variables in jest.mock factories.
- * All mocks start with 'mock' prefix and are declared above each jest.mock.
- */
-
-// Firebase authentication mocks (variables in scope for jest.mock)
+// Firebase authentication mocks (must be in scope for jest.mock)
 const mockLogin = jest.fn();
 const mockSignup = jest.fn();
 const mockLogout = jest.fn();
 let mockAuthCallback = null;
-// Current user for authentication simulation
 const mockUser = { email: "user@example.com" };
 
 jest.mock("../firebase", () => ({
